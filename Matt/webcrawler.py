@@ -19,12 +19,16 @@ sleep(2)
 
 selectYear = Select(driver.find_element_by_name("ddlTerm"))
 selectYear.select_by_index(1)
+sleep(1)
 
 selectSchool = Select(driver.find_element_by_name("ddlSchool"))
 selectSchool.select_by_index(1)
 
+sleep(1)
 selectDept = Select(driver.find_element_by_name("ddlDept"))
 selectDept.select_by_index(3)
+
+sleep(1)
 
 
 submit = driver.find_element_by_name("btnSearchTop").click()
