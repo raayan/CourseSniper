@@ -35,7 +35,6 @@ submit = driver.find_element_by_name("btnSearchTop").click()
 
 driver.execute_script("return document.getElementsByTagName('html')[0].innerHTML")
 sleep(2)
-
 html = driver.page_source
 
 
