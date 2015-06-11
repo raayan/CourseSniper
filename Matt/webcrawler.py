@@ -87,12 +87,10 @@ def update_DB(class_tuples):
 
 def update_entry(class_tuple):
     global class_list
-
     post = class_list.find_one({"CRN": class_tuple[0]})
 
-    #if(post['STATUS'] == 'closed' and class_tuple[2] == 'Open' ):
-        #sendemail
-
+    if(post['STATUS'] == 'Closed' and class_tuple[2] == 'Open' ):
+        snipe(post)
     class_list.update_one({"CRN": class_tuple[0]}, {'$set': {'STATUS': class_tuple[2]}})
 
 def start_sniping(email, crn):
@@ -102,11 +100,9 @@ def start_sniping(email, crn):
     class_list.update_one({"CRN": crn}, {'$addToSet': {'Users': email}})
     send_confirm(email, post)
 
-def snipe(crn):
-    post = class_list.find_one({"CRN": crn})
+def snipe(post):
     for email in post['Users']:
         send_snipemail(email, post)
-
 
 def send_snipemail(email, post):
     crn = post['CRN']
@@ -148,4 +144,5 @@ def send_confirm(email, post):
 #web_crawler()
 
 #snipe('10013')
-start_sniping('raayanp01@gmail.com', '10013')
+Class_tuple = ('80790', 'AAS 220', 'Open')
+update_entry(Class_tuple)
