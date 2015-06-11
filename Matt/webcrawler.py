@@ -100,6 +100,7 @@ def start_sniping(email, crn):
 
     post = class_list.find_one({"CRN": crn})
     class_list.update_one({"CRN": crn}, {'$addToSet': {'Users': email}})
+    send_confirm(email, post)
 
 def snipe(crn):
     post = class_list.find_one({"CRN": crn})
@@ -112,9 +113,8 @@ def send_snipemail(email, post):
     s_class = post['NAME']
     from_addr = 'ur.snipeteam@gmail.com'
 
-
     #add option to resnipe here, and link to registration page
-    msg = MIMEText("Hey!\n The class " + s_class + " you are currently sniping has just opened up.\nSnag it while it's still available! \n GL,\n Your faithful Snipers")
+    msg = MIMEText("Hey!\n\n The class " + s_class + " you are currently sniping has just opened up.\n\nSnag it while it's still available! \n\n GL,\n Your Faithful Snipers")
     msg['From'] = 'ur.snipeteam@gmail.com'
     msg['To'] =  email
     msg['Subject'] = "The course " + s_class + ' has just opened up. Snag it!'
@@ -126,7 +126,26 @@ def send_snipemail(email, post):
     server.sendmail('ur.snipeteam', email, msg.as_string())
     server.quit()
 
+def send_confirm(email, post):
+    crn = post['CRN']
+    s_class = post['NAME']
+
+    from_addr = 'ur.snipeteam@gmail.com'
+
+    #add option to resnipe here, and link to registration page
+    msg = MIMEText("Hey!\n\n You have successfully started watching the class " + s_class + ".\n\n We will notify you if it becomes available! \n\n GL,\n Your Faithful Snipers")
+    msg['From'] = 'ur.snipeteam@gmail.com'
+    msg['To'] =  email
+    msg['Subject'] = "You have successfully started sniping " + s_class + "."
+
+    server = smtplib.SMTP('smtp.gmail.com:587')
+    server.starttls()
+    server.login(from_addr,'tightjeans')
+    server.sendmail('ur.snipeteam', email, msg.as_string())
+    server.quit()
+
 
 #web_crawler()
 
-snipe('10013')
+#snipe('10013')
+start_sniping('raayanp01@gmail.com', '10013')
