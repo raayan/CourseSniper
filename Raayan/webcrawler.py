@@ -24,11 +24,11 @@ def page_scan(html):
         obj = (CRN, CNum, Status)
         print(obj)
         list.append(obj)
+        j+=2;
         if j < 10:
             add = "0" + str(j)
         else:
             add = str(j)
-        j+=2;
     return list
 
 
