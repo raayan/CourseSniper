@@ -40,4 +40,16 @@ soup = BeautifulSoup(open("test.html"))
 
 
 sleep(2)
-print(soup.prettify())
+# print(soup.prettify())
+
+j = 1
+add = "01"
+
+while (soup.find(id = "rpResults_ctl" + add + "_lblTitle") != None):
+    print(soup.find(id = "rpResults_ctl" + add + "_lblCRN").string.strip() + " || " + soup.find(id = "rpResults_ctl" + add + "_lblCNum").string.strip()+ " || " + soup.find(id = "rpResults_ctl" + add + "_lblStatus").string.strip())
+
+    if j < 10:
+        add = "0" + str(j)
+    else:
+        add = str(j)
+    j+=2;
