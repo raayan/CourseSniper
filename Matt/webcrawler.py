@@ -80,7 +80,8 @@ def update_DB(class_tuples):
         else:
             update_entry(x)
 
-    class_list.insert_many(posts)
+    if(posts):
+        posts.class_list.insert_many(posts)
 
 
 
