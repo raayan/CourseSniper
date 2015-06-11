@@ -13,6 +13,8 @@ from bs4 import BeautifulSoup
 import re
 import pymongo
 from pymongo import MongoClient
+import smtplib
+from email.mime.text import MIMEText
 
 
 URI = "mongodb://admin:tightjeans@ds043982.mongolab.com:43982/ur_coursesniper"
@@ -57,14 +59,14 @@ def web_crawler():
     for i in range(1, len(options)):
         selectDept = Select(driver.find_element_by_name('ddlDept'))
         selectDept.select_by_index(i)
-        sleep(1)
+        sleep(3)
         submit = driver.find_element_by_name("btnSearchTop").click()
         driver.execute_script("return document.getElementsByTagName('html')[0].innerHTML")
-        sleep(2)
+        sleep(3)
         classes = page_scan(driver.page_source)
         update_DB(classes)
         print(classes)
-        sleep(2)
+        sleep(3)
 
     driver.close()
 
@@ -99,7 +101,32 @@ def start_sniping(email, crn):
     post = class_list.find_one({"CRN": crn})
     class_list.update_one({"CRN": crn}, {'$addToSet': {'Users': email}})
 
+def snipe(crn):
+    post = class_list.find_one({"CRN": crn})
+    for email in post['Users']:
+        send_snipemail(email, post)
 
 
+def send_snipemail(email, post):
+    crn = post['CRN']
+    s_class = post['NAME']
+    from_addr = 'ur.snipeteam@gmail.com'
 
-web_crawler()
+
+    #add option to resnipe here, and link to registration page
+    msg = MIMEText("Hey!\n The class " + s_class + " you are currently sniping has just opened up.\nSnag it while it's still available! \n GL,\n Your faithful Snipers")
+    msg['From'] = 'ur.snipeteam@gmail.com'
+    msg['To'] =  email
+    msg['Subject'] = "The course " + s_class + ' has just opened up. Snag it!'
+
+
+    server = smtplib.SMTP('smtp.gmail.com:587')
+    server.starttls()
+    server.login(from_addr,'tightjeans')
+    server.sendmail('ur.snipeteam', email, msg.as_string())
+    server.quit()
+
+
+#web_crawler()
+
+snipe('10013')
