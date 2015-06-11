@@ -15,6 +15,12 @@ import pymongo
 from pymongo import MongoClient
 
 
+URI = "mongodb://admin:tightjeans@ds043982.mongolab.com:43982/ur_coursesniper"
+client = MongoClient(URI)
+cs_db = client.ur_coursesniper
+class_list = cs_db.classes
+
+
 
 
 #scans webpage and pulls courses and stores in tuple (CRN, NAME, STATUS)
@@ -51,7 +57,6 @@ def web_crawler():
     options = selectDept.options
 
     for i in range(1, len(options)):
-
         selectDept = Select(driver.find_element_by_name('ddlDept'))
         selectDept.select_by_index(i)
         sleep(1)
@@ -59,18 +64,37 @@ def web_crawler():
         driver.execute_script("return document.getElementsByTagName('html')[0].innerHTML")
         sleep(2)
         classes = page_scan(driver.page_source)
+        update_DB(classes)
         print(classes)
         sleep(2)
 
     driver.close()
 
-def addToDB(class_tuples):
-        client = MongoClient()
-        db = client.test1
-        for x in class_tuples:
-            post = {"CNum": x[0], "CRN":x[1], "Status": x[2]}
-            posts = db.posts
-            post_id = posts.insert_one(post).inserted_id
+def update_DB(class_tuples):
+    global class_list
+
+    posts = []
+    for x in class_tuples:
+        if(class_list.find_one({"CRN" : x[0] }) == None):
+            posts.append({"CRN": x[0], "NAME": x[1], "STATUS": x[2], "Users": []})
+        else:
+            update_entry(x)
+
+    class_list.insert_many(posts)
+
+
+
+def update_entry(class_tuple):
+    global class_list
+
+    post = class_list.find_one({"CRN": class_tuple[0]})
+
+    #if(post['STATUS'] == 'closed' and class_tuple[2] == 'Open' ):
+        #sendemail
+
+    class_list.update_one({"CRN": class_tuple[0]}, {'$set': {'STATUS': class_tuple[2]}})
+
+
 
 
 
