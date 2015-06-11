@@ -21,8 +21,6 @@ cs_db = client.ur_coursesniper
 class_list = cs_db.classes
 
 
-
-
 #scans webpage and pulls courses and stores in tuple (CRN, NAME, STATUS)
 def page_scan(html):
     list = []
@@ -95,7 +93,11 @@ def update_entry(class_tuple):
 
     class_list.update_one({"CRN": class_tuple[0]}, {'$set': {'STATUS': class_tuple[2]}})
 
+def start_sniping(email, crn):
+    global class_list
 
+    post = class_list.find_one({"CRN": crn})
+    class_list.update_one({"CRN": crn}, {'$addToSet': {'Users': email}})
 
 
 
