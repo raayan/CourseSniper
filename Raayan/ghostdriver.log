@@ -1,0 +1,14 @@
+[INFO  - 2015-06-11T04:08:44.840Z] GhostDriver - Main - running on port 64151
+[INFO  - 2015-06-11T04:08:45.484Z] Session [8dc55b70-0fef-11e5-91ab-3f9c91359eb2] - page.settings - {"XSSAuditingEnabled":false,"javascriptCanCloseWindows":true,"javascriptCanOpenWindows":true,"javascriptEnabled":true,"loadImages":true,"localToRemoteUrlAccessEnabled":false,"userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X) AppleWebKit/538.1 (KHTML, like Gecko) PhantomJS/2.0.0 Safari/538.1","webSecurityEnabled":true}
+[INFO  - 2015-06-11T04:08:45.484Z] Session [8dc55b70-0fef-11e5-91ab-3f9c91359eb2] - page.customHeaders:  - {}
+[INFO  - 2015-06-11T04:08:45.484Z] Session [8dc55b70-0fef-11e5-91ab-3f9c91359eb2] - Session.negotiatedCapabilities - {"browserName":"phantomjs","version":"2.0.0","driverName":"ghostdriver","driverVersion":"1.2.0","platform":"mac-10.9 (Mavericks)-64bit","javascriptEnabled":true,"takesScreenshot":true,"handlesAlerts":false,"databaseEnabled":false,"locationContextEnabled":false,"applicationCacheEnabled":false,"browserConnectionEnabled":false,"cssSelectorsEnabled":true,"webStorageEnabled":false,"rotatable":false,"acceptSslCerts":false,"nativeEvents":true,"proxy":{"proxyType":"direct"}}
+[INFO  - 2015-06-11T04:08:45.484Z] SessionManagerReqHand - _postNewSessionCommand - New Session Created: 8dc55b70-0fef-11e5-91ab-3f9c91359eb2
+[ERROR - 2015-06-11T04:08:52.754Z] Session [8dc55b70-0fef-11e5-91ab-3f9c91359eb2] - page.onError - msg: TypeError: null is not an object (evaluating 'this._currentTask._notified')
+
+  :262 in error
+[ERROR - 2015-06-11T04:08:52.754Z] Session [8dc55b70-0fef-11e5-91ab-3f9c91359eb2] - page.onError - stack:
+  Sys$_ScriptLoader$_scriptLoadedHandler (https://cdcs.ur.rochester.edu/ScriptResource.axd?d=D8GxOLJCF32HreN1-37gbLWYDCZRah8pKUbxpdHCrjytuUkWfFO6KCgJRiH9uVy0BKFUPrKrdfroRP-OAhudSjUjBLG91gOY-SkNK-eesBKDOLmQZXtaZUQIHChzSthMzodRHF2reAMRGGkC1OOsMpVeZzjZC0h54YOT9zG8BfbP6-S70&t=7af48e88:3665)
+  (anonymous function) (https://cdcs.ur.rochester.edu/ScriptResource.axd?d=D8GxOLJCF32HreN1-37gbLWYDCZRah8pKUbxpdHCrjytuUkWfFO6KCgJRiH9uVy0BKFUPrKrdfroRP-OAhudSjUjBLG91gOY-SkNK-eesBKDOLmQZXtaZUQIHChzSthMzodRHF2reAMRGGkC1OOsMpVeZzjZC0h54YOT9zG8BfbP6-S70&t=7af48e88:47)
+  (anonymous function) (https://cdcs.ur.rochester.edu/ScriptResource.axd?d=D8GxOLJCF32HreN1-37gbLWYDCZRah8pKUbxpdHCrjytuUkWfFO6KCgJRiH9uVy0BKFUPrKrdfroRP-OAhudSjUjBLG91gOY-SkNK-eesBKDOLmQZXtaZUQIHChzSthMzodRHF2reAMRGGkC1OOsMpVeZzjZC0h54YOT9zG8BfbP6-S70&t=7af48e88:3852)
+
+  :262 in error

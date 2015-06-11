@@ -20,23 +20,24 @@ def page_scan(html):
     j = 1
     add = "01"
     while (soup.find(id = "rpResults_ctl" + add + "_lblTitle") != None):
+        print(add)
         CRN = soup.find(id = "rpResults_ctl" + add + "_lblCRN").string.strip()
         CNum = soup.find(id = "rpResults_ctl" + add + "_lblCNum").string.strip()
         Status = soup.find(id = "rpResults_ctl" + add + "_lblStatus").string.strip()
         print(CRN + " || " + CNum + " || " + Status)
         list.append((CRN, CNum, Status))
+        j+=2;
         if j < 10:
             add = "0" + str(j)
         else:
             add = str(j)
-        j+=2;
     return list
 
 
 
 #populates/updates database, webcrawls
 def web_crawler():
-    driver = webdriver.Firefox()
+    driver = webdriver.PhantomJS()
     driver.get("https://cdcs.ur.rochester.edu/")
     driver.execute_script("return document.getElementsByTagName('html')[0].innerHTML")
     sleep(2)
