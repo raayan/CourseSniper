@@ -22,6 +22,8 @@ client = MongoClient(URI)
 cs_db = client.ur_coursesniper
 class_list = cs_db.classes
 
+#make verify function to ensure that course is not already open
+
 
 #scans webpage and pulls courses and stores in tuple (CRN, NAME, STATUS)
 def page_scan(html):
@@ -84,7 +86,6 @@ def update_DB(class_tuples):
         class_list.insert_many(posts)
 
 
-
 def update_entry(class_tuple):
     global class_list
     post = class_list.find_one({"CRN": class_tuple[0]})
@@ -95,7 +96,6 @@ def update_entry(class_tuple):
 
 def start_sniping(email, crn):
     global class_list
-
     post = class_list.find_one({"CRN": crn})
     class_list.update_one({"CRN": crn}, {'$addToSet': {'Users': email}})
     send_confirm(email, post)
@@ -139,6 +139,8 @@ def send_confirm(email, post):
     server.login(from_addr,'tightjeans')
     server.sendmail('ur.snipeteam', email, msg.as_string())
     server.quit()
+
+
 
 
 #web_crawler()
