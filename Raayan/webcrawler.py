@@ -106,4 +106,4 @@ def addToDB(CRN, CNum, Status):
 #Begin Process
 # web_crawler()
 
-crawlpage(1)
+crawlpage(16)
