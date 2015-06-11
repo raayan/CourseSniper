@@ -81,7 +81,7 @@ def update_DB(class_tuples):
             update_entry(x)
 
     if(posts):
-        posts.class_list.insert_many(posts)
+        class_list.insert_many(posts)
 
 
 
