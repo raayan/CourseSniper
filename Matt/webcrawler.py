@@ -74,7 +74,6 @@ def web_crawler():
 
 def update_DB(class_tuples):
     global class_list
-
     posts = []
     for x in class_tuples:
         if(class_list.find_one({"CRN" : x[0] }) == None):
@@ -84,7 +83,6 @@ def update_DB(class_tuples):
 
     if(posts):
         class_list.insert_many(posts)
-
 
 def update_entry(class_tuple):
     global class_list
@@ -144,7 +142,44 @@ def send_confirm(email, post):
 
 
 #web_crawler()
+soup = BeautifulSoup("""<form method=post action="/">
+            <dl>
+    <div class="form-element">
+        <dt><label for="email">Email</label></dt>
+        <dd><input id="email" name="email" type="text" value="">
 
+        </dd>
+    </div>
+
+
+    <div class="form-element">
+        <dt><label for="subject">Subject</label></dt>
+        <dd><input autocomplete="off" id="subject" name="subject" placeholder="Department Number. Ex: '640' for Math" type="text" value="">
+
+        </dd>
+    </div>
+
+
+    <div class="form-element">
+        <dt><label for="course_number">Course Number</label></dt>
+        <dd><input id="course_number" name="course_number" type="text" value="">
+
+        </dd>
+    </div>
+
+
+    <div class="form-element">
+        <dt><label for="section">Section</label></dt>
+        <dd><input id="section" name="section" type="text" value="">
+
+        </dd>
+    </div>
+
+            </dl>
+            <button class="btn btn-primary" type="submit">Snipe</button>
+        </form>
+
+                </div>
+""")
+print(soup.prettify())
 #snipe('10013')
-Class_tuple = ('80790', 'AAS 220', 'Open')
-update_entry(Class_tuple)
