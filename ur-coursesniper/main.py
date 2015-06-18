@@ -18,8 +18,12 @@ import webapp2
 
 class MainHandler(webapp2.RequestHandler):
     def get(self):
+<<<<<<< HEAD
     	html = open('static/index.html')
         self.response.write(html.read())
+=======
+        self.response.write('My name is Matt Shippee')
+>>>>>>> 857cac336280620355ed089ce534f9fb7d9a9187
 
 app = webapp2.WSGIApplication([
     ('/', MainHandler)
